@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -29,18 +28,16 @@ export default function Navbar() {
           </svg>
         </button>
       </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="md:hidden overflow-hidden glass">
-            <div className="px-4 py-4 flex flex-col gap-4">
-              {links.map(l => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-300 hover:text-white">{l.label}</a>
-              ))}
-              <a href="https://2026-03-06-lead-magnet.vercel.app" className="px-5 py-2 rounded-lg bg-primary-600 text-white text-sm font-medium text-center">Get Started</a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div className="md:hidden glass">
+          <div className="px-4 py-4 flex flex-col gap-4">
+            {links.map(l => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-300 hover:text-white">{l.label}</a>
+            ))}
+            <a href="https://2026-03-06-lead-magnet.vercel.app" className="px-5 py-2 rounded-lg bg-primary-600 text-white text-sm font-medium text-center">Get Started</a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

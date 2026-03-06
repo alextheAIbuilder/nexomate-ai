@@ -21,23 +21,51 @@ const scenarios = [
 export default function Scenarios() {
   return (
     <section className="py-24 px-4">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">What Automation Could Do for Your Agency</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Before & After Automation</h2>
           <p className="text-gray-400 max-w-xl mx-auto">Real scenarios. Not fake testimonials—just what&apos;s possible when you stop doing everything manually.</p>
         </div>
-        <div className="space-y-8">
+
+        {/* Visual before/after */}
+        <div className="grid sm:grid-cols-2 gap-6 mb-16">
+          <div className="relative rounded-2xl overflow-hidden border border-red-500/20">
+            <img src="/images/before-chaos.png" alt="Before automation - chaotic desk" className="w-full h-64 object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="text-red-400 text-xs font-semibold uppercase tracking-wider mb-1">Without Automation</div>
+              <p className="text-white font-semibold">Drowning in spreadsheets, sticky notes, and missed calls</p>
+            </div>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden border border-emerald-500/20">
+            <img src="/images/after-clean.png" alt="After automation - clean workflow" className="w-full h-64 object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">With NexomateAI</div>
+              <p className="text-white font-semibold">Everything automated, nothing falls through the cracks</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Scenario cards */}
+        <div className="space-y-6">
           {scenarios.map((s, i) => (
-            <div key={i} className="glass rounded-2xl p-8">
+            <div key={i} className="glass rounded-2xl p-8 hover:border-primary-500/20 transition">
               <h3 className="text-lg font-semibold text-white mb-4">{s.title}</h3>
               <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <div className="text-red-400/80 text-xs font-semibold uppercase tracking-wider mb-2">Without Automation</div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{s.before}</p>
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 w-1 rounded-full bg-red-500/40" />
+                  <div>
+                    <div className="text-red-400/80 text-xs font-semibold uppercase tracking-wider mb-2">Without Automation</div>
+                    <p className="text-gray-400 text-sm leading-relaxed">{s.before}</p>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-emerald-400/80 text-xs font-semibold uppercase tracking-wider mb-2">With NexomateAI</div>
-                  <p className="text-gray-300 text-sm leading-relaxed">{s.after}</p>
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 w-1 rounded-full bg-emerald-500/40" />
+                  <div>
+                    <div className="text-emerald-400/80 text-xs font-semibold uppercase tracking-wider mb-2">With NexomateAI</div>
+                    <p className="text-gray-300 text-sm leading-relaxed">{s.after}</p>
+                  </div>
                 </div>
               </div>
             </div>
