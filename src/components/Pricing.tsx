@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 const plans = [
   {
@@ -35,13 +34,13 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Transparent Pricing</h2>
           <p className="text-gray-400 max-w-xl mx-auto">No hidden fees. No surprise invoices. Most of our competitors won&apos;t even show you pricing until a sales call. We think that&apos;s backwards.</p>
-        </motion.div>
+        </div>
         <div className="grid md:grid-cols-3 gap-8">
           {plans.map((p, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
+            <div key={i}
               className={`rounded-2xl p-8 flex flex-col ${p.highlighted ? "bg-gradient-to-b from-primary-600/20 to-accent-600/10 border-2 border-primary-500/40 relative" : "glass"}`}>
               {p.highlighted && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">Most Popular</div>}
               <h3 className="text-xl font-semibold text-white">{p.name}</h3>
@@ -61,7 +60,7 @@ export default function Pricing() {
                 className={`block text-center py-3 rounded-xl font-semibold transition ${p.highlighted ? "bg-primary-600 hover:bg-primary-500 text-white" : "glass hover:bg-white/10 text-white"}`}>
                 {p.cta}
               </a>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

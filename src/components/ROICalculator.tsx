@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 export default function ROICalculator() {
   const [employees, setEmployees] = useState(3);
@@ -9,19 +8,18 @@ export default function ROICalculator() {
   const [missedLeads, setMissedLeads] = useState(10);
 
   const monthlyLaborCost = employees * hoursManual * hourlyRate * 4;
-  const missedRevenue = missedLeads * 1200 * 4; // avg policy value $1200/yr
+  const missedRevenue = missedLeads * 1200 * 4;
   const totalMonthlyWaste = monthlyLaborCost + missedRevenue;
   const annualWaste = totalMonthlyWaste * 12;
 
   return (
     <section id="roi-calculator" className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">How Much Is Manual Work Costing You?</h2>
           <p className="text-gray-400">Adjust the sliders to match your agency. The numbers might surprise you.</p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="glass rounded-2xl p-8 sm:p-10">
+        </div>
+        <div className="glass rounded-2xl p-8 sm:p-10">
           <div className="grid sm:grid-cols-2 gap-8 mb-10">
             <div>
               <label className="block text-sm text-gray-400 mb-2">Team members doing manual tasks</label>
@@ -67,7 +65,7 @@ export default function ROICalculator() {
               Start Saving →
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

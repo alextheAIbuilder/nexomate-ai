@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   { q: "Do I need to change my current AMS or CRM?", a: "No. We integrate with your existing systems—Applied Epic, HawkSoft, AMS360, Salesforce, and others. We work around your stack, not the other way around." },
@@ -16,25 +15,20 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-24 px-4">
       <div className="max-w-3xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-        </motion.div>
+        </div>
         <div className="space-y-3">
           {faqs.map((f, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-              className="glass rounded-xl overflow-hidden">
+            <div key={i} className="glass rounded-xl overflow-hidden">
               <button onClick={() => setOpen(open === i ? null : i)} className="w-full px-6 py-4 text-left flex justify-between items-center">
                 <span className="text-white font-medium">{f.q}</span>
                 <span className="text-primary-400 ml-4 flex-shrink-0">{open === i ? "−" : "+"}</span>
               </button>
-              <AnimatePresence>
-                {open === i && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="px-6 pb-4 text-gray-400 text-sm leading-relaxed">{f.a}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {open === i && (
+                <div className="px-6 pb-4 text-gray-400 text-sm leading-relaxed">{f.a}</div>
+              )}
+            </div>
           ))}
         </div>
       </div>

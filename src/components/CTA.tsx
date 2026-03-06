@@ -1,11 +1,9 @@
 "use client";
-import { motion } from "framer-motion";
 
 export default function CTA() {
   return (
     <section className="py-24 px-4">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="max-w-4xl mx-auto text-center glass rounded-3xl p-12 sm:p-16 relative overflow-hidden">
+      <div className="max-w-4xl mx-auto text-center glass rounded-3xl p-12 sm:p-16 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-primary-600/20 rounded-full blur-3xl" />
         <div className="relative">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Stop Leaving Money on the Table?</h2>
@@ -18,7 +16,7 @@ export default function CTA() {
           </a>
           <p className="text-gray-500 text-sm mt-4">No commitment required. See if your agency qualifies.</p>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

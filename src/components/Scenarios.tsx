@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 const scenarios = [
   {
@@ -23,14 +22,13 @@ export default function Scenarios() {
   return (
     <section className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">What Automation Could Do for Your Agency</h2>
           <p className="text-gray-400 max-w-xl mx-auto">Real scenarios. Not fake testimonials—just what&apos;s possible when you stop doing everything manually.</p>
-        </motion.div>
+        </div>
         <div className="space-y-8">
           {scenarios.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              className="glass rounded-2xl p-8">
+            <div key={i} className="glass rounded-2xl p-8">
               <h3 className="text-lg font-semibold text-white mb-4">{s.title}</h3>
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
@@ -42,7 +40,7 @@ export default function Scenarios() {
                   <p className="text-gray-300 text-sm leading-relaxed">{s.after}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
