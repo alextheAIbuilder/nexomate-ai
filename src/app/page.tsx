@@ -4,6 +4,7 @@ import SocialProof from "@/components/SocialProof";
 import PainPoints from "@/components/PainPoints";
 import BeforeAfter from "@/components/BeforeAfter";
 import Services from "@/components/Services";
+import Integrations from "@/components/Integrations";
 import HowItWorks from "@/components/HowItWorks";
 import ROICalculator from "@/components/ROICalculator";
 import Pricing from "@/components/Pricing";
@@ -22,6 +23,7 @@ export default function Home() {
       <ScrollReveal><BeforeAfter /></ScrollReveal>
       <ScrollReveal><Services /></ScrollReveal>
       <ScrollReveal><HowItWorks /></ScrollReveal>
+      <ScrollReveal><Integrations /></ScrollReveal>
       <ScrollReveal><ROICalculator /></ScrollReveal>
       <ScrollReveal><Pricing /></ScrollReveal>
       <ScrollReveal><FAQ /></ScrollReveal>
