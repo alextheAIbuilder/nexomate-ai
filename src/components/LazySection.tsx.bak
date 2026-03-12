@@ -1,0 +1,61 @@
+"use client";
+
+import { useEffect, useRef, useState } from 'react';
+
+interface LazySectionProps {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+  threshold?: number;
+  rootMargin?: string;
+  className?: string;
+}
+
+export default function LazySection({ 
+  children, 
+  fallback,
+  threshold = 0.1,
+  rootMargin = '50px',
+  className = ''
+}: LazySectionProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasLoaded) {
+          setIsVisible(true);
+          setHasLoaded(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold,
+        rootMargin
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold, rootMargin, hasLoaded]);
+
+  const defaultFallback = (
+    <div className="animate-pulse bg-gray-100 rounded-lg h-96 w-full flex items-center justify-center">
+      <div className="text-gray-400">Loading...</div>
+    </div>
+  );
+
+  return (
+    <div ref={ref} className={className}>
+      {isVisible ? children : (fallback || defaultFallback)}
+    </div>
+  );
+}

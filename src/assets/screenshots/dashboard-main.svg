@@ -1,0 +1,58 @@
+
+    <svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+      <!-- Dashboard background -->
+      <rect width="1400" height="900" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+      
+      <!-- Header -->
+      <rect x="0" y="0" width="1400" height="80" fill="#1a365d"/>
+      <text x="40" y="45" font-family="Arial, sans-serif" font-size="24" fill="white" font-weight="bold">
+        NexomateAI Dashboard
+      </text>
+      
+      <!-- Sidebar -->
+      <rect x="0" y="80" width="250" height="820" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1"/>
+      
+      <!-- Main content area -->
+      <rect x="270" y="100" width="300" height="180" fill="white" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+      <text x="290" y="130" font-family="Arial, sans-serif" font-size="16" fill="#1a365d" font-weight="bold">
+        AI Call Analytics
+      </text>
+      <rect x="290" y="140" width="200" height="8" fill="#38a169" rx="4"/>
+      <text x="290" y="170" font-family="Arial, sans-serif" font-size="14" fill="#4a5568">
+        247 calls handled this month
+      </text>
+      <text x="290" y="190" font-family="Arial, sans-serif" font-size="14" fill="#4a5568">
+        98.5% accuracy rate
+      </text>
+      
+      <!-- Lead management widget -->
+      <rect x="590" y="100" width="300" height="180" fill="white" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+      <text x="610" y="130" font-family="Arial, sans-serif" font-size="16" fill="#1a365d" font-weight="bold">
+        Lead Management
+      </text>
+      <circle cx="650" cy="170" r="30" fill="#d69e2e" opacity="0.8"/>
+      <text x="635" y="175" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">
+        42
+      </text>
+      <text x="690" y="175" font-family="Arial, sans-serif" font-size="14" fill="#4a5568">
+        New leads today
+      </text>
+      
+      <!-- Charts area -->
+      <rect x="270" y="300" width="620" height="300" fill="white" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+      <text x="290" y="330" font-family="Arial, sans-serif" font-size="16" fill="#1a365d" font-weight="bold">
+        Performance Analytics
+      </text>
+      
+      <!-- Simple chart visualization -->
+      <rect x="300" y="350" width="580" height="200" fill="#f7fafc"/>
+      <polyline points="320,500 360,450 400,420 440,380 480,360 520,340 560,320" 
+                stroke="#38a169" stroke-width="3" fill="none"/>
+      <text x="320" y="525" font-family="Arial, sans-serif" font-size="12" fill="#4a5568">
+        Jan
+      </text>
+      <text x="560" y="525" font-family="Arial, sans-serif" font-size="12" fill="#4a5568">
+        Jun
+      </text>
+    </svg>
+  

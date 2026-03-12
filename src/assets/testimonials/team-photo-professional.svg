@@ -1,0 +1,24 @@
+
+    <svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a365d;stop-opacity:0.1" />
+          <stop offset="100%" style="stop-color:#d69e2e;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+      
+      <rect width="800" height="600" fill="url(#bgGradient)"/>
+      
+      <!-- Professional team silhouettes -->
+      <ellipse cx="200" cy="300" rx="60" ry="80" fill="#1a365d" opacity="0.7"/>
+      <ellipse cx="350" cy="300" rx="60" ry="80" fill="#d69e2e" opacity="0.7"/>
+      <ellipse cx="500" cy="300" rx="60" ry="80" fill="#38a169" opacity="0.7"/>
+      <ellipse cx="650" cy="300" rx="60" ry="80" fill="#1a365d" opacity="0.7"/>
+      
+      <!-- Office environment -->
+      <rect x="50" y="450" width="700" height="100" fill="#f7fafc" opacity="0.8"/>
+      <text x="250" y="520" font-family="Arial, sans-serif" font-size="24" fill="#1a365d" font-weight="bold">
+        Professional Insurance AI Team
+      </text>
+    </svg>
+  

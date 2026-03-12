@@ -1,0 +1,112 @@
+
+    <svg width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="profitGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#38a169;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#48bb78;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#e53e3e;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#fc8181;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Title -->
+      <text x="500" y="40" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="24" fill="#1a365d" font-weight="bold">
+        ROI Calculator: Insurance Agency Transformation
+      </text>
+      
+      <!-- Before AI section -->
+      <text x="200" y="80" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="18" fill="#e53e3e" font-weight="bold">
+        Before AI Automation
+      </text>
+      
+      <!-- Current costs visualization -->
+      <rect x="50" y="100" width="300" height="180" fill="#fff5f5" stroke="#e53e3e" 
+            stroke-width="2" rx="10"/>
+      
+      <rect x="80" y="130" width="240" height="30" fill="url(#costGradient)" rx="4"/>
+      <text x="200" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        $8,500/month operational costs
+      </text>
+      
+      <text x="200" y="180" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • Missed calls: $2,500 lost revenue
+      </text>
+      <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • Manual data entry: 20 hrs/week
+      </text>
+      <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • Delayed follow-ups: 30% lead loss
+      </text>
+      <text x="200" y="240" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • After-hours opportunities: $3,000 lost
+      </text>
+      
+      <!-- After AI section -->
+      <text x="750" y="80" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="18" fill="#38a169" font-weight="bold">
+        With AI Automation
+      </text>
+      
+      <!-- AI benefits visualization -->
+      <rect x="600" y="100" width="300" height="180" fill="#f0fff4" stroke="#38a169" 
+            stroke-width="2" rx="10"/>
+      
+      <rect x="630" y="130" width="240" height="30" fill="url(#profitGradient)" rx="4"/>
+      <text x="750" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        $15,200/month revenue gain
+      </text>
+      
+      <text x="750" y="180" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • 98% call capture: $5,200 additional revenue
+      </text>
+      <text x="750" y="200" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • 15+ hrs saved: $4,500 value/week
+      </text>
+      <text x="750" y="220" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • Instant follow-up: $3,500 recovered
+      </text>
+      <text x="750" y="240" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d">
+        • 24/7 availability: $2,000 after-hours
+      </text>
+      
+      <!-- ROI Calculation -->
+      <rect x="200" y="320" width="600" height="150" fill="#1a365d" rx="15"/>
+      <text x="500" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="20" fill="white" font-weight="bold">
+        Net Monthly ROI: $23,700
+      </text>
+      <text x="500" y="380" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="16" fill="#d69e2e">
+        Annual ROI: $284,400
+      </text>
+      <text x="500" y="410" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white">
+        Investment payback period: 2.1 months
+      </text>
+      <text x="500" y="440" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white">
+        5-year value: $1,422,000
+      </text>
+      
+      <!-- Call to action -->
+      <rect x="300" y="500" width="400" height="60" fill="#d69e2e" rx="30"/>
+      <text x="500" y="540" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="18" fill="white" font-weight="bold">
+        Calculate YOUR Agency's ROI
+      </text>
+    </svg>
+  

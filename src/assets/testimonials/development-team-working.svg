@@ -1,0 +1,94 @@
+
+    <svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="officeBg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#f7fafc;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Modern office environment -->
+      <rect width="800" height="600" fill="url(#officeBg)"/>
+      <rect x="0" y="500" width="800" height="100" fill="#1a365d" opacity="0.1"/>
+      
+      <!-- Developer workstations -->
+      <!-- Station 1 -->
+      <rect x="50" y="200" width="150" height="100" fill="#1a365d" opacity="0.2" rx="10"/>
+      <rect x="70" y="220" width="110" height="60" fill="#000000" opacity="0.8" rx="5"/>
+      <rect x="75" y="225" width="100" height="50" fill="#38a169" opacity="0.3" rx="3"/>
+      <text x="125" y="250" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        AI Code
+      </text>
+      
+      <!-- Developer silhouette 1 -->
+      <ellipse cx="125" cy="160" rx="25" ry="30" fill="#1a365d" opacity="0.7"/>
+      <rect x="100" y="190" width="50" height="80" fill="#d69e2e" opacity="0.6" rx="5"/>
+      
+      <!-- Station 2 -->
+      <rect x="250" y="200" width="150" height="100" fill="#d69e2e" opacity="0.2" rx="10"/>
+      <rect x="270" y="220" width="110" height="60" fill="#000000" opacity="0.8" rx="5"/>
+      <rect x="275" y="225" width="100" height="50" fill="#1a365d" opacity="0.3" rx="3"/>
+      <text x="325" y="250" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        Dashboard
+      </text>
+      
+      <!-- Developer silhouette 2 -->
+      <ellipse cx="325" cy="160" rx="25" ry="30" fill="#d69e2e" opacity="0.7"/>
+      <rect x="300" y="190" width="50" height="80" fill="#38a169" opacity="0.6" rx="5"/>
+      
+      <!-- Station 3 -->
+      <rect x="450" y="200" width="150" height="100" fill="#38a169" opacity="0.2" rx="10"/>
+      <rect x="470" y="220" width="110" height="60" fill="#000000" opacity="0.8" rx="5"/>
+      <rect x="475" y="225" width="100" height="50" fill="#d69e2e" opacity="0.3" rx="3"/>
+      <text x="525" y="250" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        Analytics
+      </text>
+      
+      <!-- Developer silhouette 3 -->
+      <ellipse cx="525" cy="160" rx="25" ry="30" fill="#38a169" opacity="0.7"/>
+      <rect x="500" y="190" width="50" height="80" fill="#1a365d" opacity="0.6" rx="5"/>
+      
+      <!-- Video call screen -->
+      <rect x="600" y="150" width="150" height="100" fill="#000000" opacity="0.9" rx="10"/>
+      <rect x="610" y="160" width="130" height="80" fill="#1a365d" opacity="0.3" rx="5"/>
+      <text x="675" y="190" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        Client Meeting
+      </text>
+      <text x="675" y="210" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="#d69e2e">
+        Live Demo
+      </text>
+      
+      <!-- Team collaboration indicators -->
+      <circle cx="200" cy="350" r="15" fill="#38a169"/>
+      <text x="200" y="355" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="8" fill="white" font-weight="bold">
+        ✓
+      </text>
+      
+      <circle cx="400" cy="350" r="15" fill="#d69e2e"/>
+      <text x="400" y="355" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="8" fill="white" font-weight="bold">
+        AI
+      </text>
+      
+      <!-- Team description -->
+      <rect x="100" y="400" width="600" height="80" fill="rgba(26, 54, 93, 0.1)" rx="15"/>
+      <text x="400" y="430" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="18" fill="#1a365d" font-weight="bold">
+        Insurance AI Development Team
+      </text>
+      <text x="400" y="450" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="#4a5568">
+        Building the future of insurance automation
+      </text>
+      <text x="400" y="470" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#4a5568">
+        Remote-first team • 5+ years insurance domain expertise
+      </text>
+    </svg>
+  

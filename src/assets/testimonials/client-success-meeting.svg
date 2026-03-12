@@ -1,0 +1,103 @@
+
+    <svg width="1000" height="700" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="meetingBg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f7fafc;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#ffffff;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f7fafc;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Professional meeting room -->
+      <rect width="1000" height="700" fill="url(#meetingBg)"/>
+      
+      <!-- Conference table -->
+      <ellipse cx="500" cy="400" rx="200" ry="100" fill="#1a365d" opacity="0.2"/>
+      
+      <!-- Insurance agency team (left side) -->
+      <ellipse cx="300" cy="320" rx="30" ry="40" fill="#1a365d" opacity="0.8"/>
+      <rect x="270" y="360" width="60" height="80" fill="#d69e2e" opacity="0.7" rx="5"/>
+      <text x="300" y="460" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d" font-weight="bold">
+        Agency Owner
+      </text>
+      
+      <ellipse cx="400" cy="330" rx="30" ry="40" fill="#38a169" opacity="0.8"/>
+      <rect x="370" y="370" width="60" height="80" fill="#1a365d" opacity="0.7" rx="5"/>
+      <text x="400" y="470" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d" font-weight="bold">
+        Lead Agent
+      </text>
+      
+      <!-- NexomateAI representative (right side) -->
+      <ellipse cx="650" cy="320" rx="30" ry="40" fill="#d69e2e" opacity="0.8"/>
+      <rect x="620" y="360" width="60" height="80" fill="#1a365d" opacity="0.7" rx="5"/>
+      <text x="650" y="460" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#1a365d" font-weight="bold">
+        AI Consultant
+      </text>
+      
+      <!-- Presentation screen -->
+      <rect x="700" y="150" width="250" height="150" fill="#000000" opacity="0.9" rx="15"/>
+      <rect x="720" y="170" width="210" height="110" fill="#1a365d" opacity="0.3" rx="10"/>
+      
+      <!-- Success metrics on screen -->
+      <text x="825" y="200" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        Your Results
+      </text>
+      <text x="825" y="225" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#38a169">
+        ↑ 47% More Leads
+      </text>
+      <text x="825" y="245" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#d69e2e">
+        ↑ $18K Monthly Revenue
+      </text>
+      <text x="825" y="265" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#38a169">
+        ↓ 70% Manual Work
+      </text>
+      
+      <!-- Handshake moment -->
+      <rect x="450" y="380" width="100" height="20" fill="#d69e2e" opacity="0.8" rx="10"/>
+      <text x="500" y="395" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        Partnership Success
+      </text>
+      
+      <!-- Success indicators floating around -->
+      <circle cx="200" cy="200" r="20" fill="#38a169" opacity="0.7"/>
+      <text x="200" y="205" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        ✓
+      </text>
+      
+      <circle cx="800" cy="350" r="20" fill="#d69e2e" opacity="0.7"/>
+      <text x="800" y="355" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        $
+      </text>
+      
+      <circle cx="150" cy="500" r="20" fill="#1a365d" opacity="0.7"/>
+      <text x="150" y="505" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        AI
+      </text>
+      
+      <!-- Meeting outcome -->
+      <rect x="150" y="550" width="700" height="100" fill="rgba(26, 54, 93, 0.9)" rx="20"/>
+      <text x="500" y="580" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="20" fill="white" font-weight="bold">
+        "NexomateAI transformed our agency in 30 days"
+      </text>
+      <text x="500" y="605" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="#d69e2e">
+        - Sarah Mitchell, Mitchell Insurance Agency
+      </text>
+      <text x="500" y="625" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        47% more leads • $216K additional annual revenue
+      </text>
+    </svg>
+  

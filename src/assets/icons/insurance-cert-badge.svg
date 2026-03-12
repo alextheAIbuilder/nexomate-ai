@@ -1,0 +1,14 @@
+
+    <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+      <rect width="120" height="80" fill="#d69e2e" rx="8"/>
+      <polygon points="60,15 70,30 85,30 75,42 80,57 60,47 40,57 45,42 35,30 50,30" fill="white"/>
+      <text x="60" y="55" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="9" fill="white" font-weight="bold">
+        INSURANCE
+      </text>
+      <text x="60" y="68" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="8" fill="white">
+        Industry Certified
+      </text>
+    </svg>
+  

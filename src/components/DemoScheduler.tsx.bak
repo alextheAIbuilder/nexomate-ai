@@ -1,0 +1,794 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Calendar, 
+  Clock, 
+  User, 
+  Mail, 
+  Phone, 
+  Building, 
+  Users, 
+  CheckCircle2, 
+  ArrowLeft,
+  ArrowRight,
+  Globe,
+  Video,
+  MapPin,
+  Zap,
+  Shield,
+  Target,
+  TrendingUp,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
+
+interface TimeSlot {
+  time: string;
+  available: boolean;
+  timezone: string;
+}
+
+interface DemoType {
+  id: string;
+  name: string;
+  duration: number;
+  description: string;
+  icon: any;
+  color: string;
+  features: string[];
+}
+
+interface CalendarDay {
+  date: Date;
+  available: boolean;
+  slots: TimeSlot[];
+}
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  employees: string;
+  currentSoftware: string;
+  primaryGoal: string;
+  preferredContact: 'email' | 'phone' | 'either';
+}
+
+const demoTypes: DemoType[] = [
+  {
+    id: 'overview',
+    name: 'Product Overview',
+    duration: 30,
+    description: 'Get a complete walkthrough of NexomateAI features and capabilities',
+    icon: Target,
+    color: 'blue',
+    features: ['AI Chat Demo', 'Dashboard Preview', 'ROI Calculator', 'Integration Options']
+  },
+  {
+    id: 'technical',
+    name: 'Technical Deep Dive',
+    duration: 45,
+    description: 'Detailed technical discussion for IT decision makers',
+    icon: Shield,
+    color: 'purple',
+    features: ['Security Overview', 'API Documentation', 'Integration Walkthrough', 'Technical Q&A']
+  },
+  {
+    id: 'custom',
+    name: 'Custom Solution Design',
+    duration: 60,
+    description: 'Personalized demo focused on your specific agency needs',
+    icon: Zap,
+    color: 'green',
+    features: ['Needs Analysis', 'Custom Workflow Design', 'Pricing Discussion', 'Implementation Planning']
+  }
+];
+
+const timeSlots: TimeSlot[] = [
+  { time: '9:00 AM', available: true, timezone: 'EST' },
+  { time: '10:00 AM', available: true, timezone: 'EST' },
+  { time: '11:00 AM', available: false, timezone: 'EST' },
+  { time: '12:00 PM', available: true, timezone: 'EST' },
+  { time: '1:00 PM', available: true, timezone: 'EST' },
+  { time: '2:00 PM', available: true, timezone: 'EST' },
+  { time: '3:00 PM', available: false, timezone: 'EST' },
+  { time: '4:00 PM', available: true, timezone: 'EST' },
+  { time: '5:00 PM', available: true, timezone: 'EST' }
+];
+
+const employeeRanges = [
+  '1-5 employees',
+  '6-15 employees',
+  '16-50 employees',
+  '51-100 employees',
+  '100+ employees'
+];
+
+const currentSoftwareOptions = [
+  'Applied Epic',
+  'Vertafore AMS360',
+  'AgencyBloc',
+  'EZLynx',
+  'QQCatalyst',
+  'Custom/In-house',
+  'No current system',
+  'Other'
+];
+
+const primaryGoals = [
+  'Reduce manual work',
+  'Improve customer service',
+  'Increase sales',
+  'Better reporting',
+  'Streamline workflows',
+  'Reduce costs',
+  'Scale operations'
+];
+
+export default function DemoScheduler() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedDemo, setSelectedDemo] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    employees: '',
+    currentSoftware: '',
+    primaryGoal: '',
+    preferredContact: 'email'
+  });
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isScheduled, setIsScheduled] = useState(false);
+
+  // Generate calendar days for current month
+  const generateCalendarDays = (month: Date): CalendarDay[] => {
+    const year = month.getFullYear();
+    const monthIndex = month.getMonth();
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, monthIndex, 1).getDay();
+    
+    const days: CalendarDay[] = [];
+    
+    // Add empty days for previous month
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      days.push({
+        date: new Date(year, monthIndex, -(firstDayOfMonth - i - 1)),
+        available: false,
+        slots: []
+      });
+    }
+    
+    // Add days for current month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, monthIndex, day);
+      const isToday = date >= new Date();
+      const isWeekday = date.getDay() !== 0 && date.getDay() !== 6;
+      
+      days.push({
+        date,
+        available: isToday && isWeekday,
+        slots: isToday && isWeekday ? timeSlots : []
+      });
+    }
+    
+    return days;
+  };
+
+  const [calendarDays, setCalendarDays] = useState<CalendarDay[]>(generateCalendarDays(currentMonth));
+
+  useEffect(() => {
+    setCalendarDays(generateCalendarDays(currentMonth));
+  }, [currentMonth]);
+
+  const handleNextStep = () => {
+    if (currentStep < 4) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleFormChange = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    setIsSubmitting(false);
+    setIsScheduled(true);
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  };
+
+  const prevMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const renderStepIndicator = () => (
+    <div className="flex items-center justify-center mb-8">
+      {[1, 2, 3, 4].map((step) => (
+        <div key={step} className="flex items-center">
+          <div
+            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-colors ${
+              step < currentStep
+                ? 'bg-green-500 text-white'
+                : step === currentStep
+                ? 'bg-primary-500 text-white'
+                : 'bg-gray-200 text-gray-500'
+            }`}
+          >
+            {step < currentStep ? <CheckCircle2 className="w-5 h-5" /> : step}
+          </div>
+          {step < 4 && (
+            <div
+              className={`w-16 h-1 mx-2 transition-colors ${
+                step < currentStep ? 'bg-green-500' : 'bg-gray-200'
+              }`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderDemoTypeStep = () => (
+    <div className="space-y-6">
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-text-primary mb-2">Choose Your Demo Type</h3>
+        <p className="text-text-secondary">Select the demo format that best matches your needs</p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {demoTypes.map((demo) => (
+          <motion.div
+            key={demo.id}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setSelectedDemo(demo.id)}
+            className={`card-light rounded-xl p-6 cursor-pointer border-2 transition-all ${
+              selectedDemo === demo.id
+                ? 'border-primary-500 bg-primary-50'
+                : 'border-transparent hover:border-primary-300'
+            }`}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`p-3 rounded-lg ${
+                demo.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                demo.color === 'purple' ? 'bg-purple-100 text-purple-600' :
+                'bg-green-100 text-green-600'
+              }`}>
+                <demo.icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-text-primary">{demo.name}</h4>
+                <p className="text-sm text-text-muted">{demo.duration} minutes</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-text-secondary mb-4">{demo.description}</p>
+
+            <ul className="space-y-2">
+              {demo.features.map((feature, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm text-text-secondary">
+                  <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderDateTimeStep = () => (
+    <div className="space-y-6">
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-text-primary mb-2">Select Date & Time</h3>
+        <p className="text-text-secondary">Choose your preferred date and time slot</p>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-8">
+        {/* Calendar */}
+        <div className="card-light rounded-xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="font-semibold text-text-primary">
+              {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+            </h4>
+            <div className="flex gap-2">
+              <button
+                onClick={prevMonth}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={nextMonth}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Calendar Grid */}
+          <div className="grid grid-cols-7 gap-1 mb-4">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+              <div key={day} className="p-2 text-center text-sm font-medium text-text-muted">
+                {day}
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-7 gap-1">
+            {calendarDays.map((day, index) => (
+              <button
+                key={index}
+                onClick={() => day.available ? setSelectedDate(day.date) : null}
+                disabled={!day.available}
+                className={`p-3 text-sm rounded-lg transition-all ${
+                  day.available
+                    ? selectedDate?.toDateString() === day.date.toDateString()
+                      ? 'bg-primary-500 text-white'
+                      : 'hover:bg-primary-100 text-text-primary'
+                    : 'text-gray-300 cursor-not-allowed'
+                } ${
+                  day.date.getMonth() !== currentMonth.getMonth() ? 'opacity-50' : ''
+                }`}
+              >
+                {day.date.getDate()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Time Slots */}
+        <div className="card-light rounded-xl p-6">
+          <h4 className="font-semibold text-text-primary mb-4">
+            {selectedDate ? formatDate(selectedDate) : 'Select a date to see available times'}
+          </h4>
+
+          {selectedDate ? (
+            <div className="grid grid-cols-2 gap-3">
+              {timeSlots.map((slot) => (
+                <button
+                  key={slot.time}
+                  onClick={() => slot.available ? setSelectedTime(slot.time) : null}
+                  disabled={!slot.available}
+                  className={`p-3 text-sm rounded-lg border transition-all ${
+                    slot.available
+                      ? selectedTime === slot.time
+                        ? 'bg-primary-500 text-white border-primary-500'
+                        : 'border-gray-300 hover:border-primary-500 hover:bg-primary-50'
+                      : 'border-gray-200 text-gray-400 cursor-not-allowed bg-gray-50'
+                  }`}
+                >
+                  {slot.time}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 text-text-muted">
+              <Clock className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <p>Please select a date to view available time slots</p>
+            </div>
+          )}
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <div className="flex items-center gap-2 text-blue-600 mb-2">
+              <Globe className="w-4 h-4" />
+              <span className="font-medium">Time Zone</span>
+            </div>
+            <p className="text-sm text-blue-700">
+              All times shown in Eastern Time (EST). We'll send a calendar invite with your local time zone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderContactInfoStep = () => (
+    <div className="space-y-6 max-w-2xl mx-auto">
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-text-primary mb-2">Your Information</h3>
+        <p className="text-text-secondary">Help us personalize your demo experience</p>
+      </div>
+
+      <div className="card-light rounded-xl p-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              First Name *
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.firstName}
+              onChange={(e) => handleFormChange('firstName', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+              placeholder="Enter your first name"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Last Name *
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.lastName}
+              onChange={(e) => handleFormChange('lastName', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+              placeholder="Enter your last name"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Business Email *
+            </label>
+            <input
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) => handleFormChange('email', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+              placeholder="you@company.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => handleFormChange('phone', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+              placeholder="(555) 123-4567"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Company Name *
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.company}
+              onChange={(e) => handleFormChange('company', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+              placeholder="Your insurance agency"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Team Size
+            </label>
+            <select
+              value={formData.employees}
+              onChange={(e) => handleFormChange('employees', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+            >
+              <option value="">Select team size</option>
+              {employeeRanges.map((range) => (
+                <option key={range} value={range}>{range}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Current Software
+            </label>
+            <select
+              value={formData.currentSoftware}
+              onChange={(e) => handleFormChange('currentSoftware', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+            >
+              <option value="">Select current system</option>
+              {currentSoftwareOptions.map((software) => (
+                <option key={software} value={software}>{software}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Primary Goal
+            </label>
+            <select
+              value={formData.primaryGoal}
+              onChange={(e) => handleFormChange('primaryGoal', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+            >
+              <option value="">Select primary goal</option>
+              {primaryGoals.map((goal) => (
+                <option key={goal} value={goal}>{goal}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <label className="block text-sm font-medium text-text-secondary mb-3">
+            Preferred Contact Method
+          </label>
+          <div className="flex gap-4">
+            {[
+              { value: 'email', label: 'Email', icon: Mail },
+              { value: 'phone', label: 'Phone', icon: Phone },
+              { value: 'either', label: 'Either', icon: User }
+            ].map(({ value, label, icon: Icon }) => (
+              <label key={value} className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="preferredContact"
+                  value={value}
+                  checked={formData.preferredContact === value}
+                  onChange={(e) => handleFormChange('preferredContact', e.target.value as 'email' | 'phone' | 'either')}
+                  className="text-primary-600 focus:ring-primary-500"
+                />
+                <Icon className="w-4 h-4 text-text-muted" />
+                <span className="text-sm text-text-secondary">{label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderConfirmationStep = () => (
+    <div className="space-y-6 max-w-2xl mx-auto">
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-text-primary mb-2">Confirm Your Demo</h3>
+        <p className="text-text-secondary">Review your details before scheduling</p>
+      </div>
+
+      <div className="card-light rounded-xl p-6">
+        <div className="space-y-6">
+          {/* Demo Details */}
+          <div>
+            <h4 className="font-semibold text-text-primary mb-3">Demo Details</h4>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="flex items-center gap-3 mb-2">
+                {selectedDemo && (
+                  <>
+                    <demoTypes.find(d => d.id === selectedDemo)?.icon className="w-5 h-5 text-primary-600" />
+                    <span className="font-medium">{demoTypes.find(d => d.id === selectedDemo)?.name}</span>
+                  </>
+                )}
+              </div>
+              <p className="text-sm text-text-secondary mb-2">
+                {demoTypes.find(d => d.id === selectedDemo)?.description}
+              </p>
+              <p className="text-sm font-medium text-text-primary">
+                Duration: {demoTypes.find(d => d.id === selectedDemo)?.duration} minutes
+              </p>
+            </div>
+          </div>
+
+          {/* Date & Time */}
+          <div>
+            <h4 className="font-semibold text-text-primary mb-3">Date & Time</h4>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Calendar className="w-4 h-4 text-primary-600" />
+                <span className="font-medium">{selectedDate && formatDate(selectedDate)}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-primary-600" />
+                <span className="font-medium">{selectedTime} EST</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="font-semibold text-text-primary mb-3">Contact Information</h4>
+            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+              <p><span className="font-medium">Name:</span> {formData.firstName} {formData.lastName}</p>
+              <p><span className="font-medium">Company:</span> {formData.company}</p>
+              <p><span className="font-medium">Email:</span> {formData.email}</p>
+              {formData.phone && <p><span className="font-medium">Phone:</span> {formData.phone}</p>}
+              {formData.employees && <p><span className="font-medium">Team Size:</span> {formData.employees}</p>}
+              {formData.currentSoftware && <p><span className="font-medium">Current Software:</span> {formData.currentSoftware}</p>}
+            </div>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            className="w-full btn-primary px-6 py-4 rounded-xl font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Scheduling Your Demo...
+              </div>
+            ) : (
+              'Schedule My Demo'
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderSuccessStep = () => (
+    <div className="text-center space-y-6 max-w-2xl mx-auto">
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', duration: 0.6 }}
+        className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto"
+      >
+        <CheckCircle2 className="w-10 h-10 text-green-600" />
+      </motion.div>
+
+      <h3 className="text-3xl font-bold text-text-primary">Demo Scheduled!</h3>
+      
+      <div className="card-light rounded-xl p-6">
+        <p className="text-lg text-text-secondary mb-6">
+          Your demo has been successfully scheduled. Here's what happens next:
+        </p>
+
+        <div className="space-y-4 text-left">
+          <div className="flex items-start gap-3">
+            <div className="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+              1
+            </div>
+            <div>
+              <p className="font-medium text-text-primary">Calendar Invitation Sent</p>
+              <p className="text-sm text-text-muted">Check your email for a calendar invite with meeting details</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+              2
+            </div>
+            <div>
+              <p className="font-medium text-text-primary">Demo Preparation</p>
+              <p className="text-sm text-text-muted">Our team will prepare a customized demo based on your requirements</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+              3
+            </div>
+            <div>
+              <p className="font-medium text-text-primary">Follow-up Resources</p>
+              <p className="text-sm text-text-muted">Receive additional resources and pricing information after the demo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-blue-50 rounded-xl p-6">
+        <h4 className="font-semibold text-blue-900 mb-2">Need to make changes?</h4>
+        <p className="text-blue-700 text-sm mb-4">
+          Contact us at <span className="font-medium">demo@nexomateai.com</span> or call{' '}
+          <span className="font-medium">(555) 123-DEMO</span>
+        </p>
+        <div className="flex gap-3 justify-center">
+          <button className="btn-secondary px-6 py-2 rounded-lg font-medium">
+            Reschedule Demo
+          </button>
+          <button className="btn-primary px-6 py-2 rounded-lg font-medium">
+            Add to Calendar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (isScheduled) {
+    return (
+      <section id="demo-scheduler" className="py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          {renderSuccessStep()}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="demo-scheduler" className="py-24 px-4">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold font-display mb-4 text-text-primary">
+            Schedule Your Personal Demo
+          </h2>
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            Book a personalized demonstration of NexomateAI tailored to your insurance agency's specific needs.
+          </p>
+        </motion.div>
+
+        {renderStepIndicator()}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {currentStep === 1 && renderDemoTypeStep()}
+            {currentStep === 2 && renderDateTimeStep()}
+            {currentStep === 3 && renderContactInfoStep()}
+            {currentStep === 4 && renderConfirmationStep()}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation */}
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={handlePrevStep}
+            disabled={currentStep === 1}
+            className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-xl font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Previous
+          </button>
+
+          <button
+            onClick={handleNextStep}
+            disabled={
+              (currentStep === 1 && !selectedDemo) ||
+              (currentStep === 2 && (!selectedDate || !selectedTime)) ||
+              (currentStep === 3 && (!formData.firstName || !formData.lastName || !formData.email || !formData.company)) ||
+              currentStep === 4
+            }
+            className="flex items-center gap-2 px-6 py-3 btn-primary rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Next
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}

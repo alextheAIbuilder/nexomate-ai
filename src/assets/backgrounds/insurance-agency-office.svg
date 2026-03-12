@@ -1,0 +1,102 @@
+
+    <svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <!-- Professional agency office -->
+      <rect width="1200" height="800" fill="#f7fafc"/>
+      
+      <!-- Office windows -->
+      <rect x="50" y="100" width="300" height="200" fill="#e2e8f0" stroke="#1a365d" stroke-width="3" rx="10"/>
+      <rect x="70" y="120" width="260" height="160" fill="#87ceeb" opacity="0.3" rx="5"/>
+      
+      <!-- Reception desk -->
+      <rect x="400" y="300" width="400" height="100" fill="#1a365d" opacity="0.8" rx="15"/>
+      <text x="600" y="340" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="16" fill="white" font-weight="bold">
+        Professional Insurance Agency
+      </text>
+      <text x="600" y="365" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#d69e2e">
+        Powered by NexomateAI
+      </text>
+      
+      <!-- Client seating area -->
+      <rect x="100" y="450" width="200" height="100" fill="#38a169" opacity="0.3" rx="10"/>
+      <rect x="150" y="500" width="100" height="50" fill="#1a365d" opacity="0.5" rx="5"/>
+      <text x="200" y="525" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Client Lounge
+      </text>
+      
+      <!-- Agent offices -->
+      <rect x="850" y="200" width="300" height="150" fill="#d69e2e" opacity="0.2" rx="10"/>
+      <text x="1000" y="240" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="#1a365d" font-weight="bold">
+        Agent Workstations
+      </text>
+      <text x="1000" y="260" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="#4a5568">
+        AI-Enhanced Productivity
+      </text>
+      
+      <!-- Technology integration indicators -->
+      <circle cx="500" cy="500" r="30" fill="#38a169"/>
+      <text x="500" y="485" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white" font-weight="bold">
+        AI
+      </text>
+      <text x="500" y="500" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white" font-weight="bold">
+        ACTIVE
+      </text>
+      <text x="500" y="515" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="8" fill="white">
+        24/7
+      </text>
+      
+      <!-- Success metrics display -->
+      <rect x="50" y="650" width="1100" height="120" fill="rgba(26, 54, 93, 0.1)" rx="15"/>
+      <text x="600" y="685" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="20" fill="#1a365d" font-weight="bold">
+        Modern Insurance Agency Success
+      </text>
+      
+      <rect x="100" y="700" width="200" height="50" fill="#38a169" rx="10"/>
+      <text x="200" y="720" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        98% Client Satisfaction
+      </text>
+      <text x="200" y="735" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        AI-powered service
+      </text>
+      
+      <rect x="350" y="700" width="200" height="50" fill="#d69e2e" rx="10"/>
+      <text x="450" y="720" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        40% Revenue Growth
+      </text>
+      <text x="450" y="735" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        Year-over-year
+      </text>
+      
+      <rect x="600" y="700" width="200" height="50" fill="#1a365d" rx="10"/>
+      <text x="700" y="720" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        24/7 AI Support
+      </text>
+      <text x="700" y="735" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        Never miss a lead
+      </text>
+      
+      <rect x="850" y="700" width="200" height="50" fill="#38a169" rx="10"/>
+      <text x="950" y="720" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white" font-weight="bold">
+        15+ Hours Saved
+      </text>
+      <text x="950" y="735" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white">
+        Weekly per agent
+      </text>
+    </svg>
+  

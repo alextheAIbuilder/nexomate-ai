@@ -1,0 +1,15 @@
+
+    <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+      <rect width="120" height="80" fill="#38a169" rx="8"/>
+      <circle cx="60" cy="30" r="15" fill="none" stroke="white" stroke-width="3"/>
+      <rect x="50" y="25" width="20" height="15" fill="none" stroke="white" stroke-width="3" rx="3"/>
+      <text x="60" y="55" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="10" fill="white" font-weight="bold">
+        SSL SECURED
+      </text>
+      <text x="60" y="68" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="8" fill="white">
+        256-bit Encryption
+      </text>
+    </svg>
+  

@@ -1,0 +1,61 @@
+
+/* Trust Indicators CSS */
+.trust-badges {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+}
+
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.trust-badge:hover {
+  transform: translateY(-2px);
+}
+
+.ssl-badge {
+  background: linear-gradient(135deg, #38a169, #48bb78);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.gdpr-badge {
+  background: linear-gradient(135deg, #1a365d, #2c5282);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.security-badge {
+  background: linear-gradient(135deg, #d69e2e, #ed8936);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* Professional color scheme */
+:root {
+  --nexo-navy: #1a365d;
+  --nexo-gold: #d69e2e;
+  --nexo-green: #38a169;
+  --nexo-bg: #f7fafc;
+  --nexo-text: #2d3748;
+}
+  

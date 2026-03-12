@@ -1,0 +1,188 @@
+
+    <svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+         refX="0" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#1a365d" />
+        </marker>
+        <linearGradient id="processGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#d69e2e;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#38a169;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Title -->
+      <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="28" fill="#1a365d" font-weight="bold">
+        Insurance AI Automation Workflow
+      </text>
+      
+      <!-- Step 1: Incoming Call -->
+      <rect x="50" y="100" width="180" height="100" fill="#1a365d" rx="10"/>
+      <text x="140" y="130" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        Incoming Call
+      </text>
+      <text x="140" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        24/7 Availability
+      </text>
+      <text x="140" y="170" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Natural Language
+      </text>
+      
+      <!-- Arrow 1 -->
+      <line x1="230" y1="150" x2="290" y2="150" stroke="#1a365d" 
+            stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- Step 2: AI Processing -->
+      <rect x="290" y="100" width="180" height="100" fill="#d69e2e" rx="10"/>
+      <text x="380" y="130" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        AI Processing
+      </text>
+      <text x="380" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Intent Recognition
+      </text>
+      <text x="380" y="170" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Data Enrichment
+      </text>
+      
+      <!-- Arrow 2 -->
+      <line x1="470" y1="150" x2="530" y2="150" stroke="#1a365d" 
+            stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- Step 3: Lead Qualification -->
+      <rect x="530" y="100" width="180" height="100" fill="#38a169" rx="10"/>
+      <text x="620" y="130" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        Lead Qualification
+      </text>
+      <text x="620" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Scoring Algorithm
+      </text>
+      <text x="620" y="170" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Priority Assignment
+      </text>
+      
+      <!-- Arrow 3 -->
+      <line x1="710" y1="150" x2="770" y2="150" stroke="#1a365d" 
+            stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- Step 4: Agent Notification -->
+      <rect x="770" y="100" width="180" height="100" fill="#1a365d" rx="10"/>
+      <text x="860" y="130" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        Agent Notification
+      </text>
+      <text x="860" y="150" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Real-time Alert
+      </text>
+      <text x="860" y="170" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Lead Summary
+      </text>
+      
+      <!-- Traditional Process (Manual) -->
+      <text x="600" y="280" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="20" fill="#e53e3e" font-weight="bold">
+        vs. Traditional Manual Process
+      </text>
+      
+      <!-- Manual steps -->
+      <rect x="100" y="320" width="150" height="80" fill="#e53e3e" opacity="0.8" rx="8"/>
+      <text x="175" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Missed Calls
+      </text>
+      <text x="175" y="370" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        After Hours
+      </text>
+      
+      <rect x="300" y="320" width="150" height="80" fill="#e53e3e" opacity="0.8" rx="8"/>
+      <text x="375" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Manual Data
+      </text>
+      <text x="375" y="370" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Entry
+      </text>
+      
+      <rect x="500" y="320" width="150" height="80" fill="#e53e3e" opacity="0.8" rx="8"/>
+      <text x="575" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Delayed
+      </text>
+      <text x="575" y="370" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Follow-up
+      </text>
+      
+      <rect x="700" y="320" width="150" height="80" fill="#e53e3e" opacity="0.8" rx="8"/>
+      <text x="775" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Lost
+      </text>
+      <text x="775" y="370" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        Opportunities
+      </text>
+      
+      <!-- ROI Metrics -->
+      <rect x="50" y="450" width="1100" height="120" fill="#f7fafc" stroke="#e2e8f0" 
+            stroke-width="2" rx="10"/>
+      <text x="600" y="480" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="20" fill="#1a365d" font-weight="bold">
+        Measurable Results with AI Automation
+      </text>
+      
+      <rect x="100" y="500" width="200" height="60" fill="#38a169" rx="8"/>
+      <text x="200" y="525" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        98% Call Capture
+      </text>
+      <text x="200" y="545" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        vs 60% manual
+      </text>
+      
+      <rect x="350" y="500" width="200" height="60" fill="#d69e2e" rx="8"/>
+      <text x="450" y="525" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        15+ Hours Saved
+      </text>
+      <text x="450" y="545" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        per week per agent
+      </text>
+      
+      <rect x="600" y="500" width="200" height="60" fill="#1a365d" rx="8"/>
+      <text x="700" y="525" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        40% More Leads
+      </text>
+      <text x="700" y="545" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        qualified monthly
+      </text>
+      
+      <rect x="850" y="500" width="200" height="60" fill="#38a169" rx="8"/>
+      <text x="950" y="525" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="14" fill="white" font-weight="bold">
+        $50K+ ROI
+      </text>
+      <text x="950" y="545" text-anchor="middle" font-family="Arial, sans-serif" 
+            font-size="12" fill="white">
+        annually
+      </text>
+    </svg>
+  

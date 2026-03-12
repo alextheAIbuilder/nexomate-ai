@@ -1,0 +1,626 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  CheckCircle2, 
+  XCircle, 
+  AlertCircle, 
+  Clock,
+  Zap,
+  Database,
+  Cloud,
+  Shield,
+  Link,
+  Download,
+  Search,
+  Filter,
+  ChevronRight,
+  ExternalLink,
+  Star,
+  Users,
+  Activity
+} from 'lucide-react';
+
+interface Integration {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  logo: string;
+  compatibility: 'full' | 'partial' | 'limited' | 'none';
+  setupTime: string;
+  features: string[];
+  users: number;
+  rating: number;
+  isPremium: boolean;
+  apiType: 'REST' | 'GraphQL' | 'Webhook' | 'CSV' | 'FTP';
+  lastUpdated: string;
+  status: 'checking' | 'compatible' | 'warning' | 'error';
+  issues?: string[];
+  setupSteps?: string[];
+}
+
+interface Category {
+  name: string;
+  count: number;
+  icon: any;
+  color: string;
+}
+
+const integrationCategories: Category[] = [
+  { name: 'Agency Management', count: 15, icon: Database, color: 'blue' },
+  { name: 'CRM Systems', count: 12, icon: Users, color: 'purple' },
+  { name: 'Carrier Portals', count: 23, icon: Cloud, color: 'green' },
+  { name: 'Payment Processing', count: 8, icon: Activity, color: 'orange' },
+  { name: 'Document Management', count: 7, icon: Shield, color: 'red' },
+  { name: 'Communication', count: 11, icon: Zap, color: 'yellow' }
+];
+
+const mockIntegrations: Integration[] = [
+  {
+    id: 'applied',
+    name: 'Applied Epic',
+    category: 'Agency Management',
+    description: 'Complete agency management system with policy, claims, and client management',
+    logo: '🏢',
+    compatibility: 'full',
+    setupTime: '2-3 hours',
+    features: ['Policy Management', 'Client Records', 'Claims Tracking', 'Reporting'],
+    users: 15400,
+    rating: 4.6,
+    isPremium: true,
+    apiType: 'REST',
+    lastUpdated: '2024-01-15',
+    status: 'compatible',
+    setupSteps: [
+      'Configure API credentials in Applied Epic',
+      'Set up webhook endpoints for real-time sync',
+      'Map custom fields and data structures',
+      'Test data flow and permissions'
+    ]
+  },
+  {
+    id: 'vertafore',
+    name: 'Vertafore AMS360',
+    category: 'Agency Management',
+    description: 'Industry-leading agency management solution for insurance professionals',
+    logo: '📊',
+    compatibility: 'full',
+    setupTime: '3-4 hours',
+    features: ['Policy Administration', 'Accounting', 'CRM', 'Document Storage'],
+    users: 22100,
+    rating: 4.4,
+    isPremium: true,
+    apiType: 'REST',
+    lastUpdated: '2024-01-12',
+    status: 'compatible',
+    setupSteps: [
+      'Install Vertafore API connector',
+      'Configure security certificates',
+      'Set up data synchronization rules',
+      'Configure user permissions and access levels'
+    ]
+  },
+  {
+    id: 'salesforce',
+    name: 'Salesforce',
+    category: 'CRM Systems',
+    description: 'World\'s #1 CRM platform for customer relationship management',
+    logo: '☁️',
+    compatibility: 'full',
+    setupTime: '1-2 hours',
+    features: ['Lead Management', 'Customer Analytics', 'Automation', 'Mobile App'],
+    users: 150000,
+    rating: 4.2,
+    isPremium: false,
+    apiType: 'REST',
+    lastUpdated: '2024-01-18',
+    status: 'compatible'
+  },
+  {
+    id: 'hubspot',
+    name: 'HubSpot CRM',
+    category: 'CRM Systems',
+    description: 'Free CRM with marketing, sales, and service tools',
+    logo: '🎯',
+    compatibility: 'full',
+    setupTime: '30 minutes',
+    features: ['Contact Management', 'Email Integration', 'Deal Pipeline', 'Reporting'],
+    users: 128000,
+    rating: 4.5,
+    isPremium: false,
+    apiType: 'REST',
+    lastUpdated: '2024-01-20',
+    status: 'compatible'
+  },
+  {
+    id: 'progressive',
+    name: 'Progressive Agent Portal',
+    category: 'Carrier Portals',
+    description: 'Direct integration with Progressive for quotes, policies, and claims',
+    logo: '🚗',
+    compatibility: 'partial',
+    setupTime: '4-6 hours',
+    features: ['Auto Quotes', 'Policy Management', 'Claims Status', 'Commission Tracking'],
+    users: 8900,
+    rating: 3.8,
+    isPremium: true,
+    apiType: 'Webhook',
+    lastUpdated: '2023-12-15',
+    status: 'warning',
+    issues: ['Rate limiting on API calls', 'Limited evening availability']
+  },
+  {
+    id: 'allstate',
+    name: 'Allstate Agency Connect',
+    category: 'Carrier Portals',
+    description: 'Complete Allstate integration for agents and brokers',
+    logo: '🛡️',
+    compatibility: 'limited',
+    setupTime: '6-8 hours',
+    features: ['Policy Quotes', 'Renewal Processing', 'Claims Reporting'],
+    users: 5600,
+    rating: 3.2,
+    isPremium: true,
+    apiType: 'FTP',
+    lastUpdated: '2023-11-20',
+    status: 'warning',
+    issues: ['Legacy system requires file uploads', 'No real-time sync capability']
+  },
+  {
+    id: 'stripe',
+    name: 'Stripe Payments',
+    category: 'Payment Processing',
+    description: 'Modern payment processing with advanced features',
+    logo: '💳',
+    compatibility: 'full',
+    setupTime: '45 minutes',
+    features: ['Card Processing', 'ACH Payments', 'Recurring Billing', 'Global Payments'],
+    users: 95000,
+    rating: 4.8,
+    isPremium: false,
+    apiType: 'REST',
+    lastUpdated: '2024-01-22',
+    status: 'compatible'
+  },
+  {
+    id: 'docusign',
+    name: 'DocuSign',
+    category: 'Document Management',
+    description: 'Electronic signature and document workflow platform',
+    logo: '📝',
+    compatibility: 'full',
+    setupTime: '1 hour',
+    features: ['E-Signatures', 'Document Templates', 'Audit Trails', 'Mobile Signing'],
+    users: 67000,
+    rating: 4.3,
+    isPremium: false,
+    apiType: 'REST',
+    lastUpdated: '2024-01-19',
+    status: 'compatible'
+  }
+];
+
+export default function IntegrationChecker() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showCompatibleOnly, setShowCompatibleOnly] = useState(false);
+  const [checkingIntegrations, setCheckingIntegrations] = useState(false);
+  const [integrations, setIntegrations] = useState<Integration[]>(mockIntegrations);
+  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
+
+  const filteredIntegrations = integrations.filter(integration => {
+    const matchesCategory = selectedCategory === 'all' || integration.category === selectedCategory;
+    const matchesSearch = integration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         integration.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = !showCompatibleOnly || integration.compatibility === 'full';
+    
+    return matchesCategory && matchesSearch && matchesFilter;
+  });
+
+  const runCompatibilityCheck = async () => {
+    setCheckingIntegrations(true);
+    
+    // Simulate API checks with delays
+    for (let i = 0; i < integrations.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      setIntegrations(prev => prev.map((integration, index) => {
+        if (index === i) {
+          return {
+            ...integration,
+            status: Math.random() > 0.8 ? 'warning' : 'compatible'
+          };
+        }
+        return integration;
+      }));
+    }
+    
+    setCheckingIntegrations(false);
+  };
+
+  const getStatusColor = (status: Integration['status']) => {
+    switch (status) {
+      case 'compatible': return 'text-green-600 bg-green-100';
+      case 'warning': return 'text-yellow-600 bg-yellow-100';
+      case 'error': return 'text-red-600 bg-red-100';
+      case 'checking': return 'text-blue-600 bg-blue-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getCompatibilityColor = (compatibility: Integration['compatibility']) => {
+    switch (compatibility) {
+      case 'full': return 'text-green-600 bg-green-100';
+      case 'partial': return 'text-yellow-600 bg-yellow-100';
+      case 'limited': return 'text-orange-600 bg-orange-100';
+      case 'none': return 'text-red-600 bg-red-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const StatusIcon = ({ status }: { status: Integration['status'] }) => {
+    switch (status) {
+      case 'compatible': return <CheckCircle2 className="w-5 h-5 text-green-600" />;
+      case 'warning': return <AlertCircle className="w-5 h-5 text-yellow-600" />;
+      case 'error': return <XCircle className="w-5 h-5 text-red-600" />;
+      case 'checking': return <Clock className="w-5 h-5 text-blue-600 animate-spin" />;
+      default: return <Clock className="w-5 h-5 text-gray-600" />;
+    }
+  };
+
+  return (
+    <section id="integration-checker" className="py-24 px-4">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold font-display mb-4 text-text-primary">
+            System Integration Checker
+          </h2>
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            Verify compatibility with your existing systems and discover new integrations to enhance your workflow.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Sidebar */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-1 space-y-6"
+          >
+            {/* Check All Button */}
+            <div className="card-light rounded-xl p-6">
+              <button
+                onClick={runCompatibilityCheck}
+                disabled={checkingIntegrations}
+                className="w-full btn-primary px-4 py-3 rounded-lg font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {checkingIntegrations ? (
+                  <>
+                    <Clock className="w-4 h-4 animate-spin" />
+                    Checking...
+                  </>
+                ) : (
+                  <>
+                    <Zap className="w-4 h-4" />
+                    Run Compatibility Check
+                  </>
+                )}
+              </button>
+              <p className="text-sm text-text-muted mt-2">
+                Test connections to all your systems
+              </p>
+            </div>
+
+            {/* Filters */}
+            <div className="card-light rounded-xl p-6">
+              <h3 className="font-semibold text-lg mb-4 text-text-primary">Filters</h3>
+              
+              {/* Search */}
+              <div className="mb-4">
+                <div className="relative">
+                  <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search integrations..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500"
+                  />
+                </div>
+              </div>
+
+              {/* Compatible Only Toggle */}
+              <div className="mb-4">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={showCompatibleOnly}
+                    onChange={(e) => setShowCompatibleOnly(e.target.checked)}
+                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  />
+                  <span className="text-sm text-text-secondary">
+                    Show compatible only
+                  </span>
+                </label>
+              </div>
+
+              {/* Categories */}
+              <div>
+                <h4 className="font-medium text-text-primary mb-3">Categories</h4>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setSelectedCategory('all')}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                      selectedCategory === 'all'
+                        ? 'bg-primary-100 text-primary-700'
+                        : 'text-text-secondary hover:bg-gray-100'
+                    }`}
+                  >
+                    All Categories
+                  </button>
+                  {integrationCategories.map((category) => (
+                    <button
+                      key={category.name}
+                      onClick={() => setSelectedCategory(category.name)}
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${
+                        selectedCategory === category.name
+                          ? 'bg-primary-100 text-primary-700'
+                          : 'text-text-secondary hover:bg-gray-100'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <category.icon className="w-4 h-4" />
+                        {category.name}
+                      </div>
+                      <span className="text-xs bg-gray-200 px-2 py-1 rounded">
+                        {category.count}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Main Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-3"
+          >
+            {/* Results Header */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-xl font-semibold text-text-primary">
+                  {filteredIntegrations.length} Integrations Found
+                </h3>
+                <p className="text-text-muted">
+                  {selectedCategory === 'all' ? 'All categories' : selectedCategory}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <Filter className="w-4 h-4" />
+                </button>
+                <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <Download className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Integration Grid */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <AnimatePresence>
+                {filteredIntegrations.map((integration) => (
+                  <motion.div
+                    key={integration.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="card-light rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => setSelectedIntegration(integration)}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="text-2xl">{integration.logo}</div>
+                        <div>
+                          <h4 className="font-semibold text-text-primary">{integration.name}</h4>
+                          <p className="text-sm text-text-muted">{integration.category}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <StatusIcon status={integration.status} />
+                        {integration.isPremium && (
+                          <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-text-secondary mb-4 line-clamp-2">
+                      {integration.description}
+                    </p>
+
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-muted">Compatibility</span>
+                        <span className={`text-xs px-2 py-1 rounded capitalize ${getCompatibilityColor(integration.compatibility)}`}>
+                          {integration.compatibility}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-muted">Setup Time</span>
+                        <span className="text-sm font-medium text-text-primary">
+                          {integration.setupTime}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-muted">Users</span>
+                        <span className="text-sm font-medium text-text-primary">
+                          {integration.users.toLocaleString()}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-muted">Rating</span>
+                        <div className="flex items-center gap-1">
+                          <span className="text-sm font-medium text-text-primary">
+                            {integration.rating}
+                          </span>
+                          <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-muted">API Type: {integration.apiType}</span>
+                        <ChevronRight className="w-4 h-4 text-text-muted" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Integration Detail Modal */}
+        <AnimatePresence>
+          {selectedIntegration && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+              onClick={() => setSelectedIntegration(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="text-4xl">{selectedIntegration.logo}</div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-text-primary">{selectedIntegration.name}</h3>
+                      <p className="text-text-muted">{selectedIntegration.category}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className={`text-xs px-2 py-1 rounded ${getStatusColor(selectedIntegration.status)}`}>
+                          {selectedIntegration.status}
+                        </span>
+                        <span className={`text-xs px-2 py-1 rounded capitalize ${getCompatibilityColor(selectedIntegration.compatibility)}`}>
+                          {selectedIntegration.compatibility} compatibility
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setSelectedIntegration(null)}
+                    className="p-2 hover:bg-gray-100 rounded-lg"
+                  >
+                    <XCircle className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+
+                <p className="text-text-secondary mb-6">{selectedIntegration.description}</p>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-semibold text-text-primary mb-3">Features</h4>
+                    <ul className="space-y-2">
+                      {selectedIntegration.features.map((feature, index) => (
+                        <li key={index} className="flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-green-600" />
+                          <span className="text-sm text-text-secondary">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-text-primary mb-3">Details</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-text-muted">Setup Time:</span>
+                        <span className="text-sm font-medium">{selectedIntegration.setupTime}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-text-muted">API Type:</span>
+                        <span className="text-sm font-medium">{selectedIntegration.apiType}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-text-muted">Users:</span>
+                        <span className="text-sm font-medium">{selectedIntegration.users.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-text-muted">Rating:</span>
+                        <span className="text-sm font-medium">{selectedIntegration.rating}/5.0</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {selectedIntegration.issues && selectedIntegration.issues.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-text-primary mb-3 flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 text-yellow-600" />
+                      Known Issues
+                    </h4>
+                    <ul className="space-y-1">
+                      {selectedIntegration.issues.map((issue, index) => (
+                        <li key={index} className="text-sm text-text-secondary pl-4">
+                          • {issue}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {selectedIntegration.setupSteps && (
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-text-primary mb-3">Setup Steps</h4>
+                    <ol className="space-y-2">
+                      {selectedIntegration.setupSteps.map((step, index) => (
+                        <li key={index} className="flex gap-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-medium">
+                            {index + 1}
+                          </span>
+                          <span className="text-sm text-text-secondary">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+
+                <div className="flex gap-4">
+                  <button className="flex-1 btn-primary px-6 py-3 rounded-xl font-medium">
+                    Start Integration
+                  </button>
+                  <button className="flex-1 btn-secondary px-6 py-3 rounded-xl font-medium flex items-center justify-center gap-2">
+                    <ExternalLink className="w-4 h-4" />
+                    View Documentation
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
