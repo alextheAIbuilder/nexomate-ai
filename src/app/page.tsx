@@ -11,6 +11,7 @@ const Services = dynamic(() => import("@/components/Services"), { ssr: false });
 const Integrations = dynamic(() => import("@/components/Integrations"), { ssr: false });
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"), { ssr: false });
 const ROICalculatorLazy = dynamic(() => import("@/components/ROICalculatorLazy"), { ssr: false });
+
 const Pricing = dynamic(() => import("@/components/Pricing"), { ssr: false });
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 const TrustIndicators = dynamic(() => import("@/components/TrustIndicators"), { ssr: false });

@@ -29,6 +29,75 @@ body {
   .glow-card {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
+  
+  /* Light theme utility classes for new components */
+  .card-light {
+    @apply bg-white border border-gray-100 shadow-sm;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors;
+  }
+  
+  .btn-accent {
+    @apply bg-purple-600 text-white hover:bg-purple-700 transition-colors;
+  }
+  
+  /* Text colors for light theme */
+  .text-text-primary {
+    @apply text-gray-900;
+  }
+  
+  .text-text-secondary {
+    @apply text-gray-700;
+  }
+  
+  .text-text-muted {
+    @apply text-gray-500;
+  }
+  
+  /* Background colors for light theme */
+  .bg-background-50 {
+    @apply bg-gray-50;
+  }
+  
+  .bg-background-100 {
+    @apply bg-gray-100;
+  }
+  
+  /* Additional color variants */
+  .bg-secondary-50 {
+    @apply bg-purple-50;
+  }
+  
+  .bg-secondary-100 {
+    @apply bg-purple-100;
+  }
+  
+  .text-secondary-600 {
+    @apply text-purple-600;
+  }
+  
+  .text-secondary-500 {
+    @apply text-purple-500;
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  /* Interactive states */
+  .hover\:shadow-xl:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
 }
 
 /* Animations */
